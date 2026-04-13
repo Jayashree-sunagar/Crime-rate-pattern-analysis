@@ -1,0 +1,73 @@
+#Queries :: 
+#------Crime Rate Pattern Analysis------#
+
+
+
+1.View All Data
+SELECT * FROM crime_data;
+
+2. Top 5 States with Highest Crime (2022)
+SELECT State, Crime_2022
+FROM crime_data
+ORDER BY Crime_2022 DESC
+LIMIT 5;
+
+3. Total Crimes in Each Year
+SELECT
+    SUM(Crime_2020) AS Total_2020,
+    SUM(Crime_2021) AS Total_2021,
+    SUM(Crime_2022) AS Total_2022
+FROM crime_data;
+
+4. Average Crime Rate
+SELECT AVG(Crime_Rate_2022) AS Avg_Crime_Rate
+FROM crime_data;
+
+5. States with Above Average Crime Rate
+SELECT State, Crime_Rate_2022
+FROM crime_data
+WHERE Crime_Rate_2022 > (SELECT AVG(Crime_Rate_2022) FROM crime_data);
+
+6. Crime Growth by State
+SELECT State, (Crime_2022 - Crime_2020) AS Crime_Growth
+FROM crime_data
+ORDER BY Crime_Growth DESC;
+
+7. Top 5 States by Chargesheet Rate
+SELECT State, Chargesheet_Rate_2022
+FROM crime_data
+ORDER BY Chargesheet_Rate_2022 DESC
+LIMIT 5;
+
+8.Crime per Population (Highest First)
+SELECT State, Crime_Per_Pop
+FROM crime_data
+ORDER BY Crime_Per_Pop DESC;
+
+9. States with Crime Rate above 200
+SELECT State, Crime_Rate_2022
+FROM crime_data
+WHERE Crime_Rate_2022 > 200;
+
+10. List States with Low Crime (below 100)
+SELECT State, Crime_Rate_2022
+FROM crime_data
+WHERE Crime_Rate_2022 < 100;
+
+11. Show Population and Crime Together
+SELECT State, Population_2022, Crime_2022
+FROM crime_data;
+
+12.Average Crime Across 3 Years
+SELECT State,
+    (Crime_2020 + Crime_2021 + Crime_2022) / 3 AS Avg_Crime
+FROM crime_data
+ORDER BY Avg_Crime DESC;
+
+13. Correlation Insight
+SELECT
+    State,
+    Crime_2022,
+    Chargesheet_Rate_2022
+FROM crime_data
+ORDER BY Chargesheet_Rate_2022 DESC;
